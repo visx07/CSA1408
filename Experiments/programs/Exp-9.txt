@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char nt;
+    char alpha[50], beta[50];
+
+    printf("Enter the Non-Terminal: ");
+    scanf(" %c", &nt);
+
+    printf("Enter first production (without %c->): ", nt);
+    scanf("%s", alpha);
+
+    printf("Enter second production (without %c->): ", nt);
+    scanf("%s", beta);
+
+    if(alpha[0] == nt)
+    {
+        printf("\nLeft Recursion Found.\n");
+
+        printf("\nGrammar after eliminating Left Recursion:\n");
+        printf("%c -> %s%c'\n", nt, beta, nt);
+
+        printf("%c' -> ", nt);
+
+        int i;
+        for(i = 1; alpha[i] != '\0'; i++)
+            printf("%c", alpha[i]);
+
+        printf("%c' | #\n", nt);
+    }
+    else
+    {
+        printf("\nNo Left Recursion Found.\n");
+    }
+
+    return 0;
+}

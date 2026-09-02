@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <string.h>
+
+char production[3][20] = {
+    "S=AaAb|BbBa",
+    "A=#",
+    "B=#"
+};
+
+char follow[10];
+int n = 0;
+
+void add(char c)
+{
+    int i;
+    for(i = 0; i < n; i++)
+    {
+        if(follow[i] == c)
+            return;
+    }
+    follow[n++] = c;
+}
+
+void FOLLOW(char ch)
+{
+    int i, j;
+
+    // Start symbol
+    if(ch == 'S')
+        add('$');
+
+    for(i = 0; i < 3; i++)
+    {
+        for(j = 2; production[i][j] != '\0'; j++)
+        {
+            if(production[i][j] == ch)
+            {
+                char next = production[i][j + 1];
+
+                if(next >= 'a' && next <= 'z')
+                {
+                    add(next);
+                }
+                else if(next == '\0' || next == '|')
+                {
+                    if(production[i][0] != ch)
+                        FOLLOW(production[i][0]);
+                }
+            }
+        }
+    }
+}
+
+int main()
+{
+    char ch;
+    int i;
+
+    printf("Grammar:\n");
+    printf("S -> AaAb | BbBa\n");
+    printf("A -> #\n");
+    printf("B -> #\n");
+
+    printf("\nEnter Non-Terminal (S/A/B): ");
+    scanf("%c", &ch);
+
+    FOLLOW(ch);
+
+    printf("\nFOLLOW(%c) = { ", ch);
+
+    for(i = 0; i < n; i++)
+        printf("%c ", follow[i]);
+
+    printf("}\n");
+
+    return 0;
+}

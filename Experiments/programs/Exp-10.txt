@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char nt;
+    char p1[50], p2[50];
+    int i = 0;
+
+    printf("Enter the Non-Terminal: ");
+    scanf(" %c", &nt);
+
+    printf("Enter first production: ");
+    scanf("%s", p1);
+
+    printf("Enter second production: ");
+    scanf("%s", p2);
+
+    while(p1[i] == p2[i] && p1[i] != '\0')
+        i++;
+
+    if(i == 0)
+    {
+        printf("\nNo Left Factoring Required.\n");
+    }
+    else
+    {
+        printf("\nGrammar after Left Factoring:\n");
+
+        printf("%c -> ", nt);
+
+        int j;
+        for(j = 0; j < i; j++)
+            printf("%c", p1[j]);
+
+        printf("%c'\n", nt);
+
+        printf("%c' -> %s | %s\n", nt, p1 + i, p2 + i);
+    }
+
+    return 0;
+}

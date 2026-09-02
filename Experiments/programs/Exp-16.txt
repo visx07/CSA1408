@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    int n, i;
+    char result[20], arg1[20], op[5], arg2[20];
+
+    printf("Enter number of intermediate code statements: ");
+    scanf("%d", &n);
+
+    printf("\nEnter Three Address Code statements:\n");
+
+    for (i = 0; i < n; i++)
+    {
+        scanf("%s = %s %s %s", result, arg1, op, arg2);
+
+        if (strcmp(op, "+") == 0)
+        {
+            printf("\nMOV R0, %s", arg1);
+            printf("\nADD R0, %s", arg2);
+            printf("\nMOV %s, R0\n", result);
+        }
+        else if (strcmp(op, "-") == 0)
+        {
+            printf("\nMOV R0, %s", arg1);
+            printf("\nSUB R0, %s", arg2);
+            printf("\nMOV %s, R0\n", result);
+        }
+        else if (strcmp(op, "*") == 0)
+        {
+            printf("\nMOV R0, %s", arg1);
+            printf("\nMUL R0, %s", arg2);
+            printf("\nMOV %s, R0\n", result);
+        }
+        else if (strcmp(op, "/") == 0)
+        {
+            printf("\nMOV R0, %s", arg1);
+            printf("\nDIV R0, %s", arg2);
+            printf("\nMOV %s, R0\n", result);
+        }
+        else
+        {
+            printf("\nInvalid operator: %s\n", op);
+        }
+    }
+
+    return 0;
+}

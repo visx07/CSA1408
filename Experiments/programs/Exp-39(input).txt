@@ -1,0 +1,3 @@
+I like C programming.
+C is a powerful language.
+I use C for programming.
